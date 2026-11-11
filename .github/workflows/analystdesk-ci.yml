@@ -56,7 +56,7 @@ jobs:
             -r requirements-stage4a.txt \
             -r requirements-phase9a.txt \
             -r requirements-phase9b.txt
-          python -m pip install -e '.[dev]'
+          python -m pip install -e '.[dev]' pytest-asyncio
 
       - name: Offline smoke tests (no SEC corpus or hosted LLM)
         run: |
