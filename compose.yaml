@@ -1,0 +1,72 @@
+# Phase 9C — isolated local demonstration. No publishing, no paid model calls.
+# Only the following ports are published to Windows loopback, never to the LAN.
+services:
+  analystdesk-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: analystdesk:phase9c-local
+    init: true
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./data:/app/data:ro
+      - ./docker_runtime/checkpoints:/app/data/checkpoints:rw
+      - ./config:/app/config:ro
+      - hf_cache:/home/analyst/.cache/huggingface
+    environment:
+      HF_HOME: /home/analyst/.cache/huggingface
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      ANALYSTDESK_VERIFIED_RELEASE_ID: ${ANALYSTDESK_VERIFIED_RELEASE_ID:?Set_ANALYSTDESK_VERIFIED_RELEASE_ID}
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz',timeout=3).close()"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    init: true
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=7d
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    depends_on:
+      analystdesk-api:
+        condition: service_healthy
+
+  grafana:
+    image: grafana/grafana:12.0.2
+    init: true
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?Set_GRAFANA_ADMIN_PASSWORD_in_the_terminal_first}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+
+volumes:
+  hf_cache:
+  prometheus_data:
+  grafana_data:

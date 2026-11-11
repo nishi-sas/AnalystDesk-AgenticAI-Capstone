@@ -1,0 +1,3 @@
+# Reuse the installed FastMCP stack from Stages 3A-3C.
+-r requirements-stage3c.txt
+cryptography>=45,<60

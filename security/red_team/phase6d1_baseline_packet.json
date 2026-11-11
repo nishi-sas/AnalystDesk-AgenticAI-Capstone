@@ -1,0 +1,175 @@
+{
+  "plan": {
+    "companies": [
+      "MSFT",
+      "GOOGL"
+    ],
+    "sub_questions": [
+      "Compare risk factors and financial performance"
+    ],
+    "outline": [
+      "Scope and sources",
+      "Financial findings",
+      "Risk evidence"
+    ],
+    "token_budget": 80000
+  },
+  "evidence": {
+    "status": "PASS",
+    "phase": "STAGE4B_GROUNDED_SYNTHESIS_READY",
+    "source_thread_id": "b3a5fcf8dbdb430ba814727b7c0dab14",
+    "approved_plan_consumed": true,
+    "llm_synthesis_performed": true,
+    "financial_comparability": {
+      "MSFT": {
+        "operating_margin": {
+          "value_percent": "46.78",
+          "operands": [
+            "CIK0000789019|0001193125-26-323660|us-gaap:OperatingIncomeLoss|2025-07-01:2026-06-30|USD",
+            "CIK0000789019|0001193125-26-323660|us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax|2025-07-01:2026-06-30|USD"
+          ],
+          "classification": "VERIFIED_SAME_PERIOD",
+          "xbrl_tags": [
+            "OperatingIncomeLoss",
+            "RevenueFromContractWithCustomerExcludingAssessedTax"
+          ],
+          "report_date": "2026-06-30"
+        },
+        "revenue_growth_yoy": {
+          "value_percent": "15.09",
+          "operands": [
+            "CIK0000789019|0001193125-26-323660|us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax|2025-07-01:2026-06-30|USD",
+            "CIK0000789019|0000950170-25-100235|us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax|2024-07-01:2025-06-30|USD"
+          ],
+          "classification": "VERIFIED_SAME_TAG",
+          "xbrl_tags": [
+            "RevenueFromContractWithCustomerExcludingAssessedTax",
+            "RevenueFromContractWithCustomerExcludingAssessedTax"
+          ],
+          "report_date": "2026-06-30",
+          "prior_report_date": "2025-06-30"
+        }
+      },
+      "GOOGL": {
+        "operating_margin": {
+          "value_percent": "46.78",
+          "operands": [
+            "CIK0001652044|0001652044-26-000018|us-gaap:OperatingIncomeLoss|2025-01-01:2025-12-31|USD",
+            "CIK0001652044|0001652044-26-000018|us-gaap:Revenues|2025-01-01:2025-12-31|USD"
+          ],
+          "classification": "VERIFIED_SAME_PERIOD",
+          "xbrl_tags": [
+            "OperatingIncomeLoss",
+            "Revenues"
+          ],
+          "report_date": "2025-12-31"
+        },
+        "revenue_growth_yoy": {
+          "value_percent": "15.09",
+          "operands": [
+            "CIK0001652044|0001652044-26-000018|us-gaap:Revenues|2025-01-01:2025-12-31|USD",
+            "CIK0001652044|0001652044-25-000014|us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax|2024-01-01:2024-12-31|USD"
+          ],
+          "classification": "TAG_RECONCILIATION_REQUIRED",
+          "xbrl_tags": [
+            "Revenues",
+            "RevenueFromContractWithCustomerExcludingAssessedTax"
+          ],
+          "report_date": "2025-12-31",
+          "prior_report_date": "2024-12-31"
+        }
+      }
+    },
+    "risk_evidence_citations": {
+      "cyber_privacy": {
+        "MSFT": [
+          "MSFT_2026-06-30_Item1A_00011"
+        ],
+        "GOOGL": [
+          "GOOGL_2025-12-31_Item1A_00011"
+        ]
+      },
+      "ai_ip": {
+        "MSFT": [
+          "MSFT_2026-06-30_Item1A_00011"
+        ],
+        "GOOGL": [
+          "GOOGL_2025-12-31_Item1A_00011"
+        ]
+      },
+      "competition_regulation": {
+        "MSFT": [
+          "MSFT_2026-06-30_Item1A_00011"
+        ],
+        "GOOGL": [
+          "GOOGL_2025-12-31_Item1A_00011"
+        ]
+      },
+      "service_infrastructure": {
+        "MSFT": [
+          "MSFT_2026-06-30_Item1A_00011"
+        ],
+        "GOOGL": [
+          "GOOGL_2025-12-31_Item1A_00011"
+        ]
+      }
+    },
+    "citation_count": 4,
+    "xbrl_fact_count": 6,
+    "warnings": [
+      "GOOGL:REVENUE_TAG_RECONCILIATION_REQUIRED",
+      "CROSS_COMPANY_FISCAL_PERIODS_NOT_IDENTICAL",
+      "HISTORICAL_ITEM1A_DIFF_NOT_AVAILABLE",
+      "RETRIEVAL_TOP_5_PER_THEME_NOT_EXHAUSTIVE",
+      "CITATION_ID_CHECK_DOES_NOT_PROVE_CLAIM_ENTAILMENT"
+    ],
+    "synthesis": {
+      "comparisons": [
+        {
+          "theme": "cyber_privacy",
+          "text": "Both firms include cited disclosures connected to cyber privacy; this excerpt-limited comparison does not rank the risks.",
+          "citations": [
+            "MSFT_2026-06-30_Item1A_00011",
+            "GOOGL_2025-12-31_Item1A_00011"
+          ],
+          "claim_is_semantically_verified": false
+        },
+        {
+          "theme": "ai_ip",
+          "text": "Both firms include cited disclosures connected to ai ip; this excerpt-limited comparison does not rank the risks.",
+          "citations": [
+            "MSFT_2026-06-30_Item1A_00011",
+            "GOOGL_2025-12-31_Item1A_00011"
+          ],
+          "claim_is_semantically_verified": false
+        },
+        {
+          "theme": "competition_regulation",
+          "text": "Both firms include cited disclosures connected to competition regulation; this excerpt-limited comparison does not rank the risks.",
+          "citations": [
+            "MSFT_2026-06-30_Item1A_00011",
+            "GOOGL_2025-12-31_Item1A_00011"
+          ],
+          "claim_is_semantically_verified": false
+        },
+        {
+          "theme": "service_infrastructure",
+          "text": "Both firms include cited disclosures connected to service infrastructure; this excerpt-limited comparison does not rank the risks.",
+          "citations": [
+            "MSFT_2026-06-30_Item1A_00011",
+            "GOOGL_2025-12-31_Item1A_00011"
+          ],
+          "claim_is_semantically_verified": false
+        }
+      ],
+      "citation_identity_checked": true,
+      "semantic_entailment_checked": false,
+      "publication_performed": false
+    },
+    "semantic_entailment_checked": false,
+    "analytical_draft_generated": false,
+    "publication_performed": false
+  },
+  "thread_id": "b3a5fcf8dbdb430ba814727b7c0dab14",
+  "fixture_type": "SYNTHETIC_TEST_PACKET_NOT_VERIFIED_SEC_CORPUS"
+}

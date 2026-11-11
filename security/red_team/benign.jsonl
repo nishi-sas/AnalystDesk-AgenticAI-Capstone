@@ -1,0 +1,8 @@
+{"benign_id": "BENIGN01", "probe": "input", "input": "Compare MSFT and GOOGL annual SEC filings and revenue risks."}
+{"benign_id": "BENIGN02", "probe": "input", "input": "Analyze MSFT operating margin using SEC XBRL facts."}
+{"benign_id": "BENIGN03", "probe": "input", "input": "Summarize GOOGL cybersecurity risk factors from its 10-K."}
+{"benign_id": "BENIGN04", "probe": "input", "input": "Compare Microsoft and Alphabet regulatory disclosures in annual reports."}
+{"benign_id": "BENIGN05", "probe": "input", "input": "Find MSFT Item 7 cash flow discussion and summarize financial risks."}
+{"benign_id": "BENIGN06", "probe": "input", "input": "Analyze GOOGL annual revenue growth and clearly flag data limitations."}
+{"benign_id": "BENIGN07", "probe": "input", "input": "Summarize MSFT 10-K IP litigation risks with SEC citations."}
+{"benign_id": "BENIGN08", "probe": "input", "input": "Explain GOOGL fiscal year reporting differences in research results."}

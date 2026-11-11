@@ -1,0 +1,5 @@
+# Additive to installed Stage 1-3 dependencies.
+langgraph>=1.0,<2.0
+langgraph-checkpoint-sqlite>=2.0,<4.0
+openai>=2.0,<3.0
+PyYAML>=6.0,<7.0

@@ -1,0 +1,19 @@
+AnalystDesk Phase 9D - first CI smoke workflow
+
+1. Extract this ZIP into D:\IIT-B_Agentic_Ai\Capstone\AnalystDesk
+   Confirm that the file is:
+   .github\workflows\analystdesk-ci.yml
+
+2. From the activated (Analystdesk) prompt, first run the exact tests locally:
+   python -m pytest -q tests/test_phase9_api.py tests/test_phase9_metrics.py tests/test_phase7d_evaluation.py
+
+3. After they pass, inspect source control readiness BEFORE staging files:
+   git status --short
+   git check-ignore .env data/checkpoints/stage4a.sqlite3 docker_runtime/checkpoints/stage4a.sqlite3 evidence/161_phase8c2_scores.json
+
+Notes:
+- GitHub Actions runs only AFTER the workflow is committed and pushed to a GitHub repository.
+- This is an initial OFFLINE SMOKE suite, not the full 870-test regression or full security/evaluation gate.
+- The real SEC corpus and held-out-labelled evaluation data are intentionally NOT included.
+- No hosted LLM calls, publication actions, or evaluation performance claims are made by this workflow.
+- Do not publish a repository before reviewing eligible config and documentation for secrets.

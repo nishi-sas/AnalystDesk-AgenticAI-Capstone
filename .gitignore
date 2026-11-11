@@ -1,0 +1,49 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.egg-info/
+build/
+dist/
+data/edgar_cache/**
+!data/edgar_cache/.gitkeep
+evidence/*.json
+evidence/*.md
+!evidence/.gitkeep
+# Stage 3D — Research Portal local data
+data/research_portal/
+
+# Stage 4A — LangGraph persistent checkpoints
+data/checkpoints/
+
+# AnalystDesk Reflexion local persistence
+data/reflexion/
+# Phase 9D - local and private assets
+data/
+evidence/
+docker_runtime/
+evaluation/*.jsonl
+.env.*
+!.env.example
+*.sqlite3
+*.sqlite3-*
+*.db
+*.zip
+*.log
+hf_cache/
+.coverage
+htmlcov/
+
+# Local development source backups
+*.bak
+*_bak.py
+*_bkp.py
+*.py_bak
+*.py.pre*
+*.py.before_*
+*.py.stage3d_backup
+
+# Historical configuration and documentation backups
+config/*backup*
+security/*backup*

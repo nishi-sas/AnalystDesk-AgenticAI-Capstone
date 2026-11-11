@@ -1,0 +1,281 @@
+{
+  "id": null,
+  "uid": "analystdesk-phase9c",
+  "title": "AnalystDesk \u2014 Local Research Observability",
+  "tags": [
+    "analystdesk",
+    "phase9c",
+    "offline"
+  ],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "15s",
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Evidence metrics: scope",
+      "type": "text",
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "**Offline research telemetry only.** Citation and XBRL fact counts are not semantic or numeric verification. The requested 98% verified-number alert is **not active** until actual audited numerator/denominator metrics exist. No publication or paid LLM requests are triggered by this dashboard."
+      }
+    },
+    {
+      "id": 2,
+      "title": "Successful research runs",
+      "type": "stat",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "analystdesk-prometheus"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 0,
+        "y": 3
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(analystdesk_research_runs_total{outcome=\"success\"}) or vector(0)",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 3,
+      "title": "Failed research runs",
+      "type": "stat",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "analystdesk-prometheus"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 8,
+        "y": 3
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(analystdesk_research_runs_total{outcome=\"error\"}) or vector(0)",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 4,
+      "title": "Research requests (all outcomes)",
+      "type": "stat",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "analystdesk-prometheus"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 16,
+        "y": 3
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(analystdesk_research_runs_total) or vector(0)",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 5,
+      "title": "HTTP request rate",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "analystdesk-prometheus"
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum by (route) (rate(analystdesk_http_requests_total[5m]))",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "title": "Research outcomes (cumulative)",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "analystdesk-prometheus"
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum by (outcome) (analystdesk_research_runs_total)",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "title": "Research duration (p95, seconds)",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "analystdesk-prometheus"
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(analystdesk_research_duration_seconds_bucket[5m])))",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      }
+    },
+    {
+      "id": 8,
+      "title": "Citations and XBRL facts per successful run (average)",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "analystdesk-prometheus"
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 15
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "analystdesk_research_citations_per_run_sum / clamp_min(analystdesk_research_citations_per_run_count,1)",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "description": "This panel shows indexed citation IDs, NOT verified claims."
+    }
+  ]
+}

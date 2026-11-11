@@ -1,0 +1,22 @@
+# Never embed local filings, research artifacts, user credentials or checkpoints.
+.env
+.env.*
+**/.env
+**/.env.*
+data/
+evidence/
+config/
+tests/
+evaluation/
+security/
+.git/
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.ipynb
+*.zip
+*.md
+*.log
+*.sqlite*
+*.db

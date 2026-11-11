@@ -1,0 +1,2 @@
+# FastMCP installed in Stage 3A; Stage 3C worker uses Python 3.11 standard library.
+-r requirements-stage3b.txt

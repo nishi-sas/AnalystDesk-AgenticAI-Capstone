@@ -1,0 +1,3 @@
+# Install on top of the existing Phase 9A environment. Prometheus server is
+# not required for local /metrics validation.
+prometheus-client>=0.20,<1.0

@@ -1,0 +1,66 @@
+name: AnalystDesk Offline CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-smoke:
+    name: Offline API, metrics and synthetic evaluation tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      PYTHONHASHSEED: '0'
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: |
+            pyproject.toml
+            requirements-stage2b.txt
+            requirements-stage2c.txt
+            requirements-stage3a.txt
+            requirements-stage3b.txt
+            requirements-stage3c.txt
+            requirements-stage3d.txt
+            requirements-stage4a.txt
+            requirements-phase9a.txt
+            requirements-phase9b.txt
+
+      - name: Install system package
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libgomp1
+
+      - name: Install project dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install \
+            -r requirements-stage2b.txt \
+            -r requirements-stage2c.txt \
+            -r requirements-stage3d.txt \
+            -r requirements-stage4a.txt \
+            -r requirements-phase9a.txt \
+            -r requirements-phase9b.txt
+          python -m pip install -e '.[dev]'
+
+      - name: Offline smoke tests (no SEC corpus or hosted LLM)
+        run: |
+          python -m pytest -q \
+            tests/test_phase9_api.py \
+            tests/test_phase9_metrics.py \
+            tests/test_phase7d_evaluation.py

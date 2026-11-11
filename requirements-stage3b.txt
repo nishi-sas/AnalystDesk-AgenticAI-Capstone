@@ -1,0 +1,2 @@
+# FastMCP 4 was installed in Stage 3A; no additional Python dependencies.
+-r requirements-stage3a.txt

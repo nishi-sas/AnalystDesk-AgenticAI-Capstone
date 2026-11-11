@@ -1,0 +1,8 @@
+# Record the fixed snapshots used for final experiments.
+sec_requests_per_second_per_process: 4
+sec_max_retries: 4
+sec_timeout_seconds: 30
+annual_duration_min_days: 330
+annual_duration_max_days: 380
+first_companies: [MSFT, GOOGL]
+initial_fiscal_years: 3
